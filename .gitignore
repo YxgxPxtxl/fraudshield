@@ -1,0 +1,36 @@
+# Data and model outputs — never commit
+data/*
+!data/.gitkeep
+mlruns/
+mlartifacts/
+mlflow.db
+*.parquet
+*.joblib
+*.pkl
+
+# Secrets
+.env
+kaggle.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+dist/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
