@@ -184,7 +184,9 @@ class FeatureBuilder:
             raise RuntimeError("FeatureBuilder.fit() must be called before transform()")
         x = df.reindex(columns=self.columns)
         for c, cats in self.categories.items():
-            x[c] = pd.Categorical(x[c].astype("string"), categories=cats)
+            s = x[c].astype("string")
+            # Unseen values become missing explicitly (pandas 4 will refuse to do it silently).
+            x[c] = pd.Categorical(s.where(s.isin(cats)), categories=cats)
         numeric = [c for c in self.columns if c not in self.categories]
         x[numeric] = x[numeric].astype("float32")
         return x

@@ -48,6 +48,7 @@ Load the champion model anywhere:
 
 ```python
 import mlflow
+
 model = mlflow.pyfunc.load_model("models:/fraudshield@champion")
 model.predict(transactions_df, params={"top_k": 3})
 # -> score, is_fraud, reasons (top features pushing the score up, as JSON)
