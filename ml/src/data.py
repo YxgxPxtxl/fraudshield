@@ -68,14 +68,15 @@ def time_split(df: pd.DataFrame, val_frac: float = 0.15, test_frac: float = 0.15
     """Chronological train / val / test split on TransactionDT."""
     if not 0 < val_frac < 1 or not 0 < test_frac < 1 or val_frac + test_frac >= 1:
         raise ValueError("val_frac and test_frac must be in (0, 1) and sum to less than 1")
-    ordered = df.sort_values(TIME_COL, kind="mergesort").reset_index(drop=True)
-    n = len(ordered)
+    # Positions in time order; slicing df directly avoids holding a full sorted copy.
+    order = np.argsort(df[TIME_COL].to_numpy(), kind="mergesort")
+    n = len(order)
     train_end = int(n * (1 - val_frac - test_frac))
     val_end = int(n * (1 - test_frac))
     return Split(
-        train=ordered.iloc[:train_end].copy(),
-        val=ordered.iloc[train_end:val_end].copy(),
-        test=ordered.iloc[val_end:].copy(),
+        train=df.iloc[order[:train_end]].reset_index(drop=True),
+        val=df.iloc[order[train_end:val_end]].reset_index(drop=True),
+        test=df.iloc[order[val_end:]].reset_index(drop=True),
     )
 
 

@@ -3,8 +3,9 @@
 #
 # Before running:
 #   1. pip install kaggle   (included in requirements-dev.txt)
-#   2. Create an API token at https://www.kaggle.com/settings -> "Create New Token"
-#      and save it to ~/.kaggle/kaggle.json (chmod 600), or set KAGGLE_USERNAME / KAGGLE_KEY.
+#   2. Create an API token at https://www.kaggle.com/settings -> API -> Create New Token.
+#      New tokens (KGAT_...): save to ~/.kaggle/access_token (chmod 600) or export KAGGLE_API_TOKEN.
+#      Legacy kaggle.json: save to ~/.kaggle/kaggle.json (chmod 600).
 #   3. Accept the competition rules at
 #      https://www.kaggle.com/competitions/ieee-fraud-detection/rules
 #      (the download returns 403 until you do).
